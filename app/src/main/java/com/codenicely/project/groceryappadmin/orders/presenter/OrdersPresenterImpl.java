@@ -18,11 +18,11 @@ public class OrdersPresenterImpl implements OrdersPresenter {
     }
 
     @Override
-    public void getOrders(String access_token,int order_type) {
+    public void getOrders(String access_token,String selected_date, int order_type) {
 
         orderListView.showProgressbar(true);
 
-        orderProvider.getOrders(access_token,order_type, new OnOrdersListReceived() {
+        orderProvider.getOrders(access_token,selected_date,order_type, new OnOrdersListReceived() {
             @Override
             public void onFailure() {
                 orderListView.showProgressbar(false);

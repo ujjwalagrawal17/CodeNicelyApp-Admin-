@@ -2,8 +2,10 @@ package com.codenicely.project.groceryappadmin.orders.model;
 
 import com.codenicely.project.groceryappadmin.helper.Urls;
 import com.codenicely.project.groceryappadmin.orders.OnOrderStatusChanged;
+import com.codenicely.project.groceryappadmin.orders.OnOrderTotalChanged;
 import com.codenicely.project.groceryappadmin.orders.api.OrderStatusChangeApi;
 import com.codenicely.project.groceryappadmin.orders.model.data.ChangeStatusData;
+import com.codenicely.project.groceryappadmin.orders.model.data.ChangeTotalData;
 
 import java.util.concurrent.TimeUnit;
 
@@ -64,6 +66,25 @@ public class RetrofitOrderStatusChangeHelper implements OrderStatusChangeHelper 
             }
         });
 
+
+    }
+
+    @Override
+    public void changeOrderTotal(String access_token, String order_id, String total_new, final OnOrderTotalChanged onOrderTotalChanged) {
+        final Call<ChangeTotalData> changeTotalDataCall =  orderStatusChangeApi.requestOrderChangeTotal
+                (access_token, order_id, total_new);
+        changeTotalDataCall.enqueue(new Callback<ChangeTotalData>() {
+            @Override
+            public void onResponse(Call<ChangeTotalData> call, Response<ChangeTotalData> response) {
+                onOrderTotalChanged.onSuccess(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<ChangeTotalData> call, Throwable t) {
+                onOrderTotalChanged.onFailed();
+                t.printStackTrace();
+            }
+        });
 
     }
 }

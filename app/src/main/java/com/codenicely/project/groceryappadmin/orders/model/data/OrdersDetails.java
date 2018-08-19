@@ -11,19 +11,17 @@ public class OrdersDetails {
     private int price;
     private int discounted_price;
     private String unit;
-    private int size;
+    private String size;
 
-    public OrdersDetails(String image, String name, String unit, int size, int
-            quantity, int price, int discounted_price) {
+    public OrdersDetails(String image, String name, int quantity, int price, int discounted_price, String unit, String size) {
         this.image = image;
         this.name = name;
-        this.unit = unit;
-        this.size = size;
         this.quantity = quantity;
         this.price = price;
         this.discounted_price = discounted_price;
+        this.unit = unit;
+        this.size = size;
     }
-
 
     public String getImage() {
         return image;
@@ -41,7 +39,7 @@ public class OrdersDetails {
         return unit;
     }
 
-    public int getSize() {
+    public String getSize() {
         return size;
     }
 

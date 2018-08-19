@@ -1,18 +1,25 @@
 package com.codenicely.project.groceryappadmin.orders.view;
 
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.DatePicker;
+import android.widget.TextView;
 
 import com.codenicely.project.groceryappadmin.R;
+
+import java.util.Calendar;
+import java.util.TimeZone;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -22,7 +29,7 @@ import com.codenicely.project.groceryappadmin.R;
  * Use the {@link OrdersFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class OrdersFragment extends Fragment {
+public class OrdersFragment extends Fragment implements DatePickerDialog.OnDateSetListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -39,6 +46,12 @@ public class OrdersFragment extends Fragment {
     private ViewPagerAdapter viewPagerAdapter;
 
     private OnFragmentInteractionListener mListener;
+
+    public static String selected_date;
+    DatePickerDialog datePickerDialog;
+    @BindView(R.id.tv_selected_date)
+    TextView tv_selected_date;
+    Context context;
 
     public OrdersFragment() {
         // Required empty public constructor
@@ -78,6 +91,25 @@ public class OrdersFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_category_order, container, false);
         tabLayout = (TabLayout) view.findViewById(R.id.tabLayout);
         viewpager = (ViewPager) view.findViewById(R.id.viewPager);
+        ButterKnife.bind(this,view);
+        context = getContext();
+        Calendar calendar = Calendar.getInstance(TimeZone.getDefault());
+
+        tv_selected_date.setText(calendar.get(Calendar.DAY_OF_MONTH) + "/" + (calendar.get(Calendar.MONTH) + 1)
+                + "/" + calendar.get(Calendar.YEAR));
+        selected_date = tv_selected_date.getText().toString();
+
+        tv_selected_date.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                datePickerDialog.show();
+            }
+        });
+        datePickerDialog = new DatePickerDialog(
+                context, OrdersFragment.this,
+                calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH),calendar.get(Calendar.DATE));
+
+
         viewPagerAdapter = new ViewPagerAdapter(getActivity().getSupportFragmentManager());
         viewpager.setAdapter(viewPagerAdapter);
         tabLayout.setupWithViewPager(viewpager);
@@ -114,7 +146,7 @@ public class OrdersFragment extends Fragment {
 
     @Override
     public void onStart() {
-        viewPagerAdapter.notifyDataSetChanged();
+//        viewPagerAdapter.notifyDataSetChanged();
 
         super.onStart();
     }
@@ -125,6 +157,14 @@ public class OrdersFragment extends Fragment {
             mListener.onFragmentInteraction(uri);
         }
     }
+
+    @Override
+    public void onDateSet(DatePicker datePicker, int year, int month, int dayOfMonth) {
+        tv_selected_date.setText(dayOfMonth+"/"+(month+1)+"/"+year);
+        selected_date = tv_selected_date.getText().toString();
+        viewPagerAdapter.notifyDataSetChanged();
+    }
+
 
     @Override
     public void onAttach(Context context) {

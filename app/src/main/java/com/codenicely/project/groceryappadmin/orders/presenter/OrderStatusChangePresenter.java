@@ -7,5 +7,6 @@ package com.codenicely.project.groceryappadmin.orders.presenter;
 public interface OrderStatusChangePresenter {
 
     void requestOrderStatusChange(String access_token,String order_id,boolean cancle);
+    void requestOrderChangeTotal(String access_token,String order_id,String total_new);
 
 }

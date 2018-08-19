@@ -1,5 +1,6 @@
 package com.codenicely.project.groceryappadmin.orders.view;
 
+import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -13,6 +14,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -21,15 +24,21 @@ import com.codenicely.project.groceryappadmin.helper.SharedPrefs;
 import com.codenicely.project.groceryappadmin.orders.model.RetrofitOrderStatusChangeHelper;
 import com.codenicely.project.groceryappadmin.orders.model.RetrofitOrdersProvider;
 import com.codenicely.project.groceryappadmin.orders.model.data.ChangeStatusData;
+import com.codenicely.project.groceryappadmin.orders.model.data.ChangeTotalData;
 import com.codenicely.project.groceryappadmin.orders.model.data.OrdersListDetails;
 import com.codenicely.project.groceryappadmin.orders.presenter.OrderStatusChangePresenter;
 import com.codenicely.project.groceryappadmin.orders.presenter.OrderStatusChangePresenterImpl;
 import com.codenicely.project.groceryappadmin.orders.presenter.OrdersPresenter;
 import com.codenicely.project.groceryappadmin.orders.presenter.OrdersPresenterImpl;
 
+import java.util.Calendar;
 import java.util.List;
+import java.util.TimeZone;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
+
+import static com.codenicely.project.groceryappadmin.orders.view.OrdersFragment.selected_date;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -39,7 +48,7 @@ import butterknife.ButterKnife;
  * Use the {@link OrdersListFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class OrdersListFragment extends Fragment implements OrderListView, OrderStatusChangeView {
+public class OrdersListFragment extends Fragment implements OrderListView, OrderStatusChangeView{
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -99,9 +108,10 @@ public class OrdersListFragment extends Fragment implements OrderListView, Order
 
         orderStatusChangePresenter = new OrderStatusChangePresenterImpl(this, new RetrofitOrderStatusChangeHelper());
         progressDialog = new ProgressDialog(getContext());
-
         progressDialog.setMessage("Changing . . .");
         progressDialog.setTitle("Please Wait . . .");
+
+
 
         recyclerView = (RecyclerView) view.findViewById(R.id.order_recycler);
         progressBar = (ProgressBar) view.findViewById(R.id.progressBar);
@@ -112,19 +122,19 @@ public class OrdersListFragment extends Fragment implements OrderListView, Order
             switch (order_type) {
 
                 case 0:
-                    orderPresenter.getOrders(token, 0);
+                    orderPresenter.getOrders(token,selected_date, 0);
                     break;
                 case 1:
-                    orderPresenter.getOrders(token, 1);
+                    orderPresenter.getOrders(token,selected_date, 1);
                     break;
                 case 2:
-                    orderPresenter.getOrders(token, 2);
+                    orderPresenter.getOrders(token,selected_date, 2);
                     break;
                 case 3:
-                    orderPresenter.getOrders(token, 3);
+                    orderPresenter.getOrders(token,selected_date, 3);
                     break;
                 case 4:
-                    orderPresenter.getOrders(token, -1);
+                    orderPresenter.getOrders(token,selected_date, -1);
                     break;
                 default:
                     break;
@@ -184,9 +194,14 @@ public class OrdersListFragment extends Fragment implements OrderListView, Order
     @Override
     public void onStatusChanged(ChangeStatusData changeStatusData) {
 
-        orderPresenter.getOrders(sharedPrefs.getAccessToken(), order_type);
+        orderPresenter.getOrders(sharedPrefs.getAccessToken(),selected_date, order_type);
         //  ((HomePage) getContext()).setFragment(new OrdersFragment(), "OrdersFragment");
 
+    }
+
+    @Override
+    public void onTotalChanged(ChangeTotalData changeTotalData) {
+        orderPresenter.getOrders(sharedPrefs.getAccessToken(),selected_date, order_type);
     }
 
     @Override
@@ -214,9 +229,9 @@ public class OrdersListFragment extends Fragment implements OrderListView, Order
 
     public void refresh() {
         if(order_type<=3){
-            orderPresenter.getOrders(sharedPrefs.getAccessToken(), order_type);
+            orderPresenter.getOrders(sharedPrefs.getAccessToken(),selected_date, order_type);
         }else{
-            orderPresenter.getOrders(sharedPrefs.getAccessToken(), -1);
+            orderPresenter.getOrders(sharedPrefs.getAccessToken(),selected_date, -1);
 
         }
     }
@@ -246,6 +261,31 @@ public class OrdersListFragment extends Fragment implements OrderListView, Order
             public void onClick(DialogInterface dialog, int which) {
 
                 orderStatusChangePresenter.requestOrderStatusChange(sharedPrefs.getAccessToken(), orderId, cancle);
+                ad.cancel();
+            }
+        });
+        ad.setButton(DialogInterface.BUTTON_NEGATIVE, "No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                ad.cancel();
+            }
+        });
+        ad.show();
+
+    }
+
+    void changeTotal(final String orderId, final String total_new) {
+
+        final AlertDialog ad = new AlertDialog.Builder(getActivity())
+                .create();
+        ad.setCancelable(false);
+        ad.setTitle("Are you sure ?");
+        ad.setMessage("Total Amount will be changed");
+        ad.setButton(DialogInterface.BUTTON_POSITIVE, "Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                orderStatusChangePresenter.requestOrderChangeTotal(sharedPrefs.getAccessToken(), orderId, total_new);
                 ad.cancel();
             }
         });

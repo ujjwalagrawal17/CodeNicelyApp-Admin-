@@ -130,6 +130,34 @@
                     android:visibility="gone" />
             </RelativeLayout>
 
+            <RelativeLayout
+                android:id="@+id/relative2_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/relative2"
+                android:layout_toRightOf="@+id/image"
+                android:padding="2dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="2dp"
+                    android:text="Restaurant Name"
+                    android:textColor="@color/black_overlay"
+                    android:textSize="@dimen/textSizeSmall" />
+
+                <TextView
+                    android:id="@+id/restaurant_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:padding="2dp"
+                    android:text="2001"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="@dimen/textSizeSmall" />
+            </RelativeLayout>
+
         </RelativeLayout>
 
         <View
@@ -214,6 +242,7 @@
 
         <RelativeLayout
             android:id="@+id/relative3"
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/line7"
@@ -240,12 +269,63 @@
                 android:textSize="@dimen/textSizeExtraSmall"
                 android:layout_alignParentRight="true" />
         </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/relative3_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/relative3"
+            android:layout_margin="1dp"
+            android:padding="4dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Subtotal without discount :"
+                android:textSize="@dimen/textSizeExtraSmall" />
+
+            <TextView
+                android:id="@+id/subtotal_without_discount_amount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:text="200"
+                android:textSize="@dimen/textSizeExtraSmall"
+
+                />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/relative3_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/relative3_1"
+            android:layout_margin="1dp"
+            android:padding="4dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Discount :"
+                android:textSize="@dimen/textSizeExtraSmall" />
+
+            <TextView
+                android:id="@+id/discount_amount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:text="200"
+                android:textSize="@dimen/textSizeExtraSmall"
+
+                />
+        </RelativeLayout>
 
         <RelativeLayout
             android:id="@+id/relative4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/relative3"
+            android:layout_below="@+id/relative3_2"
             android:layout_margin="1dp"
             android:padding="4dp">
 
@@ -269,10 +349,37 @@
         </RelativeLayout>
 
         <RelativeLayout
-            android:id="@+id/relative5"
+            android:id="@+id/relative4_1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/relative4"
+            android:layout_margin="1dp"
+            android:padding="4dp">
+
+            <TextView
+                android:id="@+id/subtotal_gst_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="GST :"
+                android:textSize="@dimen/textSizeExtraSmall" />
+
+            <TextView
+                android:id="@+id/subtotal_gst"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:text="200"
+                android:textSize="@dimen/textSizeExtraSmall"
+
+                />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/relative5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/relative4_1"
             android:layout_margin="1dp"
             android:padding="4dp">
 
@@ -317,6 +424,13 @@
                 android:textColor="@color/accentBlue"
                 android:textSize="@dimen/textSizeMedium" />
 
+            <ImageView
+                android:id="@+id/edit_total_amount"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginRight="16dp"
+                android:layout_toLeftOf="@id/total_bill"
+                android:src="@drawable/ic_edit_black_24dp"/>
             <TextView
                 android:id="@+id/total_bill"
                 android:layout_width="wrap_content"

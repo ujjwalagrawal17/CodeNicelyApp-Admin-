@@ -14,5 +14,7 @@ import retrofit2.http.Query;
  */
 public interface RequestOrders {
     @GET(Urls.SUB_URL_ADMIN_ORDERS)
-    Call<OrdersListData> getOrders(@Query("access_token") String access_token, @Query("order_type") int order_type);
+    Call<OrdersListData> getOrders(@Query("access_token") String access_token,
+                                   @Query("selected_date") String selected_date,
+                                   @Query("order_type") int order_type);
 }

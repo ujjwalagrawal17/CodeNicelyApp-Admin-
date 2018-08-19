@@ -43,8 +43,8 @@ public class RetrofitOrdersProvider implements OrdersProvider {
     }
 
     @Override
-    public void getOrders(String access_token,int order_type, final OnOrdersListReceived onOrdersListReceived) {
-        Call<OrdersListData> call = requestOrders.getOrders(access_token,order_type);
+    public void getOrders(String access_token,String selected_date,int order_type, final OnOrdersListReceived onOrdersListReceived) {
+        Call<OrdersListData> call = requestOrders.getOrders(access_token,selected_date,order_type);
         call.enqueue(new Callback<OrdersListData>() {
             @Override
             public void onResponse(Call<OrdersListData> call, Response<OrdersListData> response) {

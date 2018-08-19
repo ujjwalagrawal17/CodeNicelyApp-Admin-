@@ -1,0 +1,6 @@
+COMMAND=PREDEX_LIBRARY_TO_DEX_ARCHIVE
+FILE_PATH=/home/ujjwal/AndroidStudioProjects/Codenicely/CodeNicelyApp-Admin-/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar
+FILE_HASH=37f01de02ceeee892fb32bf51253c71ad7178709
+DX_VERSION=1.13
+JUMBO_MODE=true
+OPTIMIZE=true

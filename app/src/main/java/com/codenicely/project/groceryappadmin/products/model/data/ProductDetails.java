@@ -5,14 +5,13 @@ package com.codenicely.project.groceryappadmin.products.model.data;
  */
 public class ProductDetails {
     private String name, image,quantity,price;
-    private int id;
 
-    public ProductDetails(String name, String image, String quantity, String price, int id) {
+
+    public ProductDetails(String name, String image, String quantity, String price) {
         this.name = name;
         this.image = image;
         this.quantity = quantity;
         this.price = price;
-        this.id = id;
     }
 
     public String getName() {
@@ -29,9 +28,5 @@ public class ProductDetails {
 
     public String getPrice() {
         return price;
-    }
-
-    public int getId() {
-        return id;
     }
 }

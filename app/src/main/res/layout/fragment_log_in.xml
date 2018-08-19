@@ -53,11 +53,12 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:layout_marginBottom="10dp"
-        android:text="Note: This app is only for Grocery App Admins.\n Only registered admins can log in"
+        android:text="Note: This app is only for Delivery Boys."
         android:textColor="@color/colorAccent"
         android:layout_alignParentBottom="true"
 
         />
+    <!--android:text="Note: This app is only for Delivery Boys. \n Only registered people can log in"-->
 
     <ProgressBar
         android:id="@+id/progressBar"

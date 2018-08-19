@@ -8,7 +8,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.Toast;
 
 import com.codenicely.project.groceryappadmin.R;
 import com.codenicely.project.groceryappadmin.orders.view.OrdersFragment;

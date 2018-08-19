@@ -49,12 +49,12 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHo
         holder.name.setText(productDetails.getName());
         holder.size.setText(productDetails.getQuantity());
         holder.price.setText(productDetails.getPrice());
-        holder.change.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ProductFragment.changePrice(productDetails.getId(),holder.name.getText().toString(),holder.size.getText().toString(),holder.price.getText().toString());
-            }
-        });
+//        holder.change.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                ProductFragment.changePrice(productDetails.getId(),holder.name.getText().toString(),holder.size.getText().toString(),holder.price.getText().toString());
+//            }
+//        });
 
 //        imageLoader.loadImage(productDetails.getImage(), holder.image, holder.imageProgressBar);
     }

@@ -1,8 +1,8 @@
 <component name="libraryTable">
   <library name="firebase-messaging-9.6.1">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/app/build/intermediates/exploded-aar/com.google.firebase/firebase-messaging/9.6.1/jars/classes.jar!/" />
-      <root url="file://$PROJECT_DIR$/app/build/intermediates/exploded-aar/com.google.firebase/firebase-messaging/9.6.1/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/firebase-messaging-9.6.1.aar/5187da247990b770352ca351a38b53b0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/firebase-messaging-9.6.1.aar/5187da247990b770352ca351a38b53b0/res" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

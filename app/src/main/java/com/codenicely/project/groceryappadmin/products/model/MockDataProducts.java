@@ -16,7 +16,7 @@ public class MockDataProducts implements ProductProvider {
     @Override
     public void getOrders(String access_token, OnProductReceived onProductReceived) {
         List<ProductDetails> list=new ArrayList<>();
-        ProductDetails productDetails=new ProductDetails("Mango","dsfds","1 kg","Rs. 200",1);
+        ProductDetails productDetails=new ProductDetails("Mango","dsfds","1 kg","Rs. 200");
         list.add(productDetails);
         list.add(productDetails);
         list.add(productDetails);
